@@ -129,7 +129,7 @@
         
         messageLabel_ = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(iconImageView_.frame) + gap, topMargin, CGRectGetWidth(frame) - CGRectGetMaxX([iconImageView_ frame]) - gap * 2.0f, CGRectGetHeight(frame) - topMargin * 2.0f)];
         [messageLabel_ setBackgroundColor:[UIColor clearColor]];
-        [messageLabel_ setTextColor:[UIColor whiteColor]];
+        [messageLabel_ setTextColor:[UIColor blackColor]];
         [messageLabel_ setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin];
         
         [containerView_ addSubview:messageLabel_];
@@ -153,15 +153,25 @@
     
     [super layoutSubviews];
     
-    CGSize messageSize = [[messageLabel_ text] sizeWithFont:[messageLabel_ font]];
+    //CGSize messageSize = [[messageLabel_ text] sizeWithFont:[messageLabel_ font]];
     
-    CGRect frame = [messageLabel_ frame];
-    frame.size.width = messageSize.width;
-    [messageLabel_ setFrame:frame];
+    //CGRect frame = [messageLabel_ frame];
+    //frame.size.width = messageSize.width;
+    //[messageLabel_ setFrame:frame];
     
-    frame = [containerView_ frame];
-    frame.size.width = CGRectGetMaxX([messageLabel_ frame]);
-    [containerView_ setFrame:frame];
+    //frame = [containerView_ frame];
+    //frame.size.width = CGRectGetMaxX([messageLabel_ frame]);
+    //[containerView_ setFrame:frame];
+    containerView_.frame = CGRectMake(0,
+                                      containerView_.frame.origin.y,
+                                      containerView_.superview.frame.size.width,
+                                      containerView_.frame.size.height);
+    
+    [messageLabel_ sizeToFit];
+    messageLabel_.frame = CGRectMake((messageLabel_.superview.frame.size.width-messageLabel_.frame.size.width)/2.0, (messageLabel_.superview.frame.size.height-messageLabel_.frame.size.height)/2.0, messageLabel_.frame.size.width, messageLabel_.frame.size.height);
+
+    loadingActivityIndicator_.frame = CGRectMake(messageLabel_.frame.origin.x-20-loadingActivityIndicator_.frame.size.width, (loadingActivityIndicator_.superview.frame.size.height-loadingActivityIndicator_.frame.size.height)/2.0, loadingActivityIndicator_.frame.size.width, loadingActivityIndicator_.frame.size.height);
+    iconImageView_.center = loadingActivityIndicator_.center;
 }
 
 /*

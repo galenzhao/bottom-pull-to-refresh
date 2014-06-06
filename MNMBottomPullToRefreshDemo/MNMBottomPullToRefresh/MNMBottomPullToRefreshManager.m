@@ -117,9 +117,10 @@ CGFloat const kAnimationDuration = 0.2f;
     
     CGRect frame = [pullToRefreshView_ frame];
     frame.origin.y = yOrigin;
-    [pullToRefreshView_ setFrame:frame];
+    //[pullToRefreshView_ setFrame:frame];
     
     [table_ addSubview:pullToRefreshView_];
+    pullToRefreshView_.frame = CGRectMake(0, yOrigin, pullToRefreshView_.superview.frame.size.width, pullToRefreshView_.frame.size.height);
 }
 
 /*
