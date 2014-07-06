@@ -127,7 +127,7 @@ CGFloat const kAnimationDuration = 0.2f;
  * Sets the pull-to-refresh view visible or not. Visible by default
  */
 - (void)setPullToRefreshViewVisible:(BOOL)visible {
-    
+    [self relocatePullToRefreshView];
     [pullToRefreshView_ setHidden:!visible];
 }
 
